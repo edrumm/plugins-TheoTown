@@ -1,0 +1,5 @@
+[{
+    "id":"$autowintercycle00",
+    "type":"script",
+    "script":"script.lua"
+}]
