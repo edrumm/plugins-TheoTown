@@ -1,0 +1,3 @@
+[submodule "src/seasonalCycle-TheoTown"]
+	path = src/seasonalCycle-TheoTown
+	url = https://github.com/edrumm/seasonalCycle-TheoTown.git
