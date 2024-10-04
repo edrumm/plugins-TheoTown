@@ -2,19 +2,26 @@ local settings
 
 function script:init()
     settings = Util.optStorage(TheoTown.getStorage(), self:getDraft():getId()..":settings")
-    -- TODO
+    settings.enableAutoWinterCycle = settings.enableAutoWinterCycle == nil and true or settings.enableAutoWinterCycle
 end
 
 function script:settings()
-    -- TODO
+    return {
+        {
+            name = 'Auto winter cycle',
+            value = settings.enableAutoWinterCycle,
+            onChange = function(state) settings.enableAutoWinterCycle = state end
+        }
+    }
 end
 
 function script:update()
-    local month = City.getDate().month
-
-    if month >= 11 or month <= 2 then
-        game.setWinter(true)
-    else
-        game.setWinter(false)
+    if settings.enableAutoWinterCycle and not DSA.isInMoon() then
+        local month = City.getMonth()
+        if month >= 11 or month <= 2 then
+            City.setFunVar("winter", 1)
+        else
+            City.setFunVar("winter", 0)
+        end
     end
 end
